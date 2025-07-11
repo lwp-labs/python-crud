@@ -1,4 +1,3 @@
----
 
 # DevOps 3-Tier CRUD App (Flask + PostgreSQL + Redis)
 
