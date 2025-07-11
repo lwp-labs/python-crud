@@ -80,23 +80,19 @@ pip install -r requirements.txt
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'devpass123';"
 ```
 
-###  2. Create DB & User
+###  2. Create DB, User & Grant permissions
 
 ```bash
 sudo -u postgres psql -c "CREATE DATABASE devopsdb;"
 sudo -u postgres psql -c "CREATE USER devuser WITH ENCRYPTED PASSWORD 'devpass123';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE devopsdb TO devuser;"
+sudo -u postgres psql -d devopsdb -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO devuser;"
+sudo -u postgres psql -d devopsdb -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO devuser;"
 ```
 
 ###  3. Apply SQL Schema
 
-**Option A: Use absolute path (recommended)**
-
-```bash
-sudo -u postgres psql -d devopsdb -f /home/YOUR_USERNAME/python-crud/db/init.sql
-```
-
-**Option B: Use /tmp workaround**
+Use /tmp workaround**
 
 ```bash
 cp db/init.sql /tmp/init.sql
@@ -145,14 +141,13 @@ App runs on:
 | ---------------------------------------------------------- | ---------------------------- |
 | [http://localhost:5000](http://localhost:5000)             | View task list               |
 | [http://localhost:5000/add](http://localhost:5000/add)     | Add new task                 |
-| [http://localhost:5000/clear](http://localhost:5000/clear) | Clear Redis cache (optional) |
 
 ---
 
 ##  Query DB from CLI
 
 ```bash
-PGPASSWORD=devpass123 psql -U devuser -h localhost -d devopsdb -c 'SELECT * FROM tasks;'
+PGPASSWORD=devpass123 psql -U devuser -h localhost -d devopsdb -c 'SELECT * FROM task;'
 ```
 
 ---
