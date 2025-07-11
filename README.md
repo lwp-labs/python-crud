@@ -57,8 +57,8 @@ sudo systemctl start redis
 ### 1. Clone the Repo & Create Virtual Environment
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/devops_crud_app.git
-cd devops_crud_app
+git clone https://github.com/YOUR_USERNAME/python-crud.git
+cd python-crud
 python3 -m venv venv
 source venv/bin/activate
 ```
